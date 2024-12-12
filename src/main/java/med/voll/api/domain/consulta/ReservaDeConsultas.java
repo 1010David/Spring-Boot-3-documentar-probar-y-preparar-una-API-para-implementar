@@ -5,7 +5,11 @@ import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.medico.MedicoRepository;
 import med.voll.api.domain.paciente.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.awt.print.Pageable;
 
 @Service
 public class ReservaDeConsultas {
@@ -34,7 +38,7 @@ public class ReservaDeConsultas {
         var consulta = new Consulta(null, medico, paciente, datos.fecha(), null);        consultaRepository.save(consulta);
     }
 
-    private Medico elegirMedico(DatosReservaConsulta datos) {
+    public Medico elegirMedico(DatosReservaConsulta datos) {
         if(datos.idMedico() != null){
             return medicoRepository.getReferenceById(datos.idMedico());
         }
@@ -42,7 +46,15 @@ public class ReservaDeConsultas {
             throw new ValidacionException("Es necesario elegir una especialidad cuando no se elige un médico");
         }
 
-        return medicoRepository.elegirMedicoAleatorioDisponibleEnLaFecha(datos.especialidad(), datos.fecha());
+        // Crear el Pageable para la consulta paginada
+        PageRequest pageable = PageRequest.of(0, 1);  // Primera página, un solo médico
+
+        // Obtener la página de médicos
+        Page<Medico> medicos = medicoRepository.elegirMedicoAleatorioDisponibleEnLaFecha(datos.especialidad(), datos.fecha(), (org.springframework.data.domain.Pageable) pageable);
+
+        // Verificar si hay resultados en la página y devolver el primer médico
+        return medicos.getContent().stream().findFirst()
+                .orElseThrow(() -> new ValidacionException("No hay médicos disponibles en la fecha y especialidad indicadas"));
     }
 
     public void cancelar(DatosCancelamientoConsulta datos) {
