@@ -10,6 +10,7 @@ import med.voll.api.domain.paciente.Paciente;
 
 import java.time.LocalDateTime;
 
+
 @Table(name = "consultas")
 @Entity(name = "Consulta")
 @Getter
@@ -31,5 +32,4 @@ public class Consulta {
     private Paciente paciente;
 
     private LocalDateTime fecha;
-
 }
