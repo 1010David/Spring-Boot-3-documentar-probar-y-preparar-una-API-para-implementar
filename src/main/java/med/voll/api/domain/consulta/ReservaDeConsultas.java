@@ -1,22 +1,17 @@
 package med.voll.api.domain.consulta;
 
 import med.voll.api.domain.ValidacionException;
-import med.voll.api.domain.consulta.validaciones.cancelamiento.ValidadorCancelamientoDeConsulta;
+import med.voll.api.domain.consulta.validaciones.reserva.ValidadorDeConsultas;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.medico.MedicoRepository;
 import med.voll.api.domain.paciente.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class ReservaDeConsultas {
-    @Autowired
-    private List<ValidadorCancelamientoDeConsulta> validadoresCancelamiento;
 
     @Autowired
     private MedicoRepository medicoRepository;
@@ -27,7 +22,10 @@ public class ReservaDeConsultas {
     @Autowired
     private ConsultaRepository consultaRepository;
 
-    public void reservar(DatosReservaConsulta datos){
+    @Autowired
+    private List<ValidadorDeConsultas> validadores;
+
+    public DatosDetalleConsulta reservar(DatosReservaConsulta datos){
 
         if(!pacienteRepository.existsById(datos.idPaciente())){
             throw new ValidacionException("No existe un paciente con el id informado");
@@ -37,12 +35,20 @@ public class ReservaDeConsultas {
             throw new ValidacionException("No existe un médico con el id informado");
         }
 
+        //validaciones
+        validadores.forEach(v -> v.validar(datos));
+
         var medico = elegirMedico(datos);
+        if(medico == null){
+            throw new ValidacionException("No existe un médico disponible en ese horario");
+        }
         var paciente = pacienteRepository.findById(datos.idPaciente()).get();
-        var consulta = new Consulta(null, medico, paciente, datos.fecha(), null);        consultaRepository.save(consulta);
+        var consulta = new Consulta(null, medico, paciente, datos.fecha());
+        consultaRepository.save(consulta);
+        return new DatosDetalleConsulta(consulta);
     }
 
-    public Medico elegirMedico(DatosReservaConsulta datos) {
+    private Medico elegirMedico(DatosReservaConsulta datos) {
         if(datos.idMedico() != null){
             return medicoRepository.getReferenceById(datos.idMedico());
         }
@@ -50,25 +56,6 @@ public class ReservaDeConsultas {
             throw new ValidacionException("Es necesario elegir una especialidad cuando no se elige un médico");
         }
 
-        // Crear el Pageable para la consulta paginada
-        PageRequest pageable = PageRequest.of(0, 1);  // Primera página, un solo médico
-
-        // Obtener la página de médicos
-        Page<Medico> medicos = medicoRepository.elegirMedicoAleatorioDisponibleEnLaFecha(datos.especialidad(), datos.fecha(), (org.springframework.data.domain.Pageable) pageable);
-
-        // Verificar si hay resultados en la página y devolver el primer médico
-        return medicos.getContent().stream().findFirst()
-                .orElseThrow(() -> new ValidacionException("No hay médicos disponibles en la fecha y especialidad indicadas"));
-    }
-
-    public void cancelar(DatosCancelamientoConsulta datos) {
-        if (!consultaRepository.existsById(datos.idConsulta())) {
-            throw new ValidacionException("¡El Id informado de la consulta no existe!");
-        }
-
-        validadoresCancelamiento.forEach(v -> v.validar(datos));
-
-        var consulta = consultaRepository.getReferenceById(datos.idConsulta());
-        consulta.cancelar(datos.motivo());
+        return medicoRepository.elegirMedicoAleatorioDisponibleEnLaFecha(datos.especialidad(), datos.fecha());
     }
 }
