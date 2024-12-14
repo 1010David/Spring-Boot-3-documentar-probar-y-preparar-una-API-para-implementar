@@ -9,6 +9,7 @@ import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.paciente.Paciente;
 
 import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
 
 
 @Table(name = "consultas")
@@ -32,4 +33,8 @@ public class Consulta {
     private Paciente paciente;
 
     private LocalDateTime fecha;
+
+    public Temporal getData() {
+        return null;
+    }
 }
