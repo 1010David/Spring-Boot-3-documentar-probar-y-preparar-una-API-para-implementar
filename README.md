@@ -4,7 +4,7 @@ Curso de Alura Oracle Next ONE
 
 Este repositorio es la continuación del proyecto original, aunque se creó un nuevo repositorio para esta fase:
 
-Repositorio original: API-SpringBootProtegiendo-buenasPracticas-a
+Repositorio original:  https://github.com/1010David/API-SpringBootProtegiendo-buenasPracticas-a
 
 Contenidos Aprendidos en el Curso
 
