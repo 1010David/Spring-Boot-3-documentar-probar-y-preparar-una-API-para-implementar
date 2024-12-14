@@ -17,6 +17,14 @@ Aislar los códigos de validaciones de reglas de negocio en clases separadas, ut
 Finalizar la implementación del algoritmo de reserva de consultas;
 Utilizar los principios SOLID para dejar el código de la funcionalidad de reserva de consultas más fácil de entender, evolucionar y testar.
 
+
+Lo que aprendimos en esta aula:
+
+Escribir tests automatizados en una aplicación con Spring Boot;
+Escribir tests automatizados de una interfaz Repository, siguiendo la estrategia de usar la misma base de datos que la aplicación utiliza;
+Sobrescribir propiedades del archivo application.properties, creando otro archivo llamado application-test.properties que sea cargado solo al ejecutar los tests, utilizando para ello la anotación @ActiveProfiles;
+Escribir tests automatizados de una clase Controller, utilizando la clase MockMvc para simular requests en la API;
+Testar escenarios de error 400 y código 200 en el test de una clase Controller.
 Lo que aprendimos en esta aula:
 
 Agregar la biblioteca SpringDoc en el proyecto para que haga la generación automatizada de la documentación de la API;
