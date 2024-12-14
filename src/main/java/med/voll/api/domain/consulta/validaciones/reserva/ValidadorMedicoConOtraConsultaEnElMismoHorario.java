@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ValidadorMedicoConOtraConsultaEnElMismoHorario implements ValidadorDeConsultas {
+public class ValidadorMedicoConOtraConsultaEnElMismoHorario implements ValidadorDeConsultas{
 
     @Autowired
     private ConsultaRepository repository;
 
     public void validar(DatosReservaConsulta datos){
-        var medicoTieneOtraConsultaEnElMismoHorario = repository.existsByMedicoIdAndFechaAndMotivoCancelamientoIsNull(datos.idMedico(), datos.fecha());
+        var medicoTieneOtraConsultaEnElMismoHorario = repository.existsByMedicoIdAndFecha(datos.idMedico(), datos.fecha());
         if(medicoTieneOtraConsultaEnElMismoHorario){
             throw new ValidacionException("Medico ya tiene otra consulta en esa misma fecha y hora");
         }
