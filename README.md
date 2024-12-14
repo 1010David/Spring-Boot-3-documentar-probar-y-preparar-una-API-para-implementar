@@ -1,34 +1,93 @@
-Spring Boot 3: documentar, probar y preparar una API para su implementación Alura Oracle Next ONE
+Spring Boot 3: Documentar, Probar y Preparar una API para su Implementación
 
-Continuación del projecto, aunque creado de nuevo un repositorio, https://github.com/1010David/API-SpringBootProtegiendo-buenasPracticas-a
+Curso de Alura Oracle Next ONE
 
-Lo que aprendimos en esta aula:
+Este repositorio es la continuación del proyecto original, aunque se creó un nuevo repositorio para esta fase:
 
-Implementar una nueva funcionalidad en el proyecto;
-Evaluar cuándo es necesario crear una clase Service en la aplicación;
-Crear una clase Service, con el objetivo de aislar códigos de reglas de negocio, utilizando la anotación @Service;
-Implementar un algoritmo para la funcionalidad de reserva de consultas;
-Realizar validaciones de integridad de las informaciones que llegan a la API;
-Implementar una consulta JPQL (Java Persistence Query Language) compleja en una interfaz repository, utilizando para eso la anotación @Query.
+Repositorio original: API-SpringBootProtegiendo-buenasPracticas-a
 
-Lo que aprendimos en esta aula:
+Contenidos Aprendidos en el Curso
 
-Aislar los códigos de validaciones de reglas de negocio en clases separadas, utilizando en ellas la anotación @Component de Spring;
-Finalizar la implementación del algoritmo de reserva de consultas;
-Utilizar los principios SOLID para dejar el código de la funcionalidad de reserva de consultas más fácil de entender, evolucionar y testar.
+1. Implementación de una Nueva Funcionalidad
+
+Creación de una clase Service:
+
+Evaluar cuándo es necesario crear una clase Service en la aplicación.
+
+Utilizar la anotación @Service para aislar el código de reglas de negocio.
+
+Funcionalidad de Reserva de Consultas:
+
+Implementar un algoritmo para gestionar reservas de consultas.
+
+Validar la integridad de los datos recibidos por la API.
+
+Consultas JPQL Complejas:
+
+Crear consultas complejas en una interfaz Repository utilizando @Query.
+
+2. Aislamiento de Validaciones de Negocio
+
+Creación de Clases de Validación:
+
+Aislar códigos de validaciones en clases separadas.
+
+Utilizar la anotación @Component para gestionar estas clases con Spring.
+
+Principios SOLID:
+
+Aplicar los principios SOLID para hacer el código más mantenible y fácil de entender.
+
+3. Pruebas Automatizadas
+
+Pruebas para Repositories:
+
+Escribir tests automatizados para una interfaz Repository.
+
+Utilizar la misma base de datos que la aplicación.
+
+Profiles de Pruebas:
+
+Crear application-test.properties para configurar propiedades específicas para tests.
+
+Utilizar @ActiveProfiles para ejecutar tests con el perfil de pruebas.
+
+Pruebas para Controllers:
+
+Utilizar MockMvc para simular requests a la API.
+
+Testar escenarios de error (código 400) y éxito (código 200).
+
+4. Documentación con SpringDoc y Swagger
+
+Generación Automática de Documentación:
+
+Integrar SpringDoc para generar la documentación de la API.
+
+Configuración de Swagger UI:
+
+Utilizar Swagger UI para visualizar y probar la API REST.
+
+Acceder a la documentación en formatos YAML y HTML.
+
+Seguridad con JWT:
+
+Configurar JWT en la documentación generada por SpringDoc.
+
+5. Preparación para la Implementación
+
+Profiles Específicos:
+
+Crear archivos de propiedades para cada profile (por ejemplo, application-prod.properties).
+
+Variables de Entorno:
+
+Configurar información sensible a través de variables de entorno.
+
+Build y Ejecución con Maven:
+
+Realizar el build del proyecto con Maven.
 
 
-Lo que aprendimos en esta aula:
 
-Escribir tests automatizados en una aplicación con Spring Boot;
-Escribir tests automatizados de una interfaz Repository, siguiendo la estrategia de usar la misma base de datos que la aplicación utiliza;
-Sobrescribir propiedades del archivo application.properties, creando otro archivo llamado application-test.properties que sea cargado solo al ejecutar los tests, utilizando para ello la anotación @ActiveProfiles;
-Escribir tests automatizados de una clase Controller, utilizando la clase MockMvc para simular requests en la API;
-Testar escenarios de error 400 y código 200 en el test de una clase Controller.
-Lo que aprendimos en esta aula:
-
-Agregar la biblioteca SpringDoc en el proyecto para que haga la generación automatizada de la documentación de la API;
-Analizar la documentación de SpringDoc para entender cómo realizar su configuración en un proyecto;
-Acceder a las direcciones que disponibilizan la documentación de la API en los formatos yaml y html;
-Utilizar Swagger UI para visualizar y probar una API Rest;
-Configurar el JWT en la documentación generada por SpringDoc.
+java -jar target/mi-aplicacion.jar --spring.config.name=application-prodjava -jar target/mi-aplicacion.jar --spring.config.name=application-prodEjecutar la aplicación desde la terminal con el comando:
