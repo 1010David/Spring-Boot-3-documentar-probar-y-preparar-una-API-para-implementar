@@ -1,93 +1,58 @@
-Spring Boot 3: Documentar, Probar y Preparar una API para su Implementación
+# Spring Boot 3: API de [Nombre de la API]
 
-Curso de Alura Oracle Next ONE
+## Descripción
+[Descripción concisa del proyecto y su objetivo]
 
-Este repositorio es la continuación del proyecto original, aunque se creó un nuevo repositorio para esta fase:
+## Tecnologías
+* Spring Boot 3
+* Java 11
+* ...
 
-Repositorio original:  https://github.com/1010David/API-SpringBootProtegiendo-buenasPracticas-a
+## Arquitectura
+[Diagrama de arquitectura simplificado]
 
-Contenidos Aprendidos en el Curso
+## Funcionalidades
+* [Funcionalidad 1]
+  * [Descripción detallada]
+  * [Ejemplo de uso]
+* [Funcionalidad 2]
+  * ...
 
-1. Implementación de una Nueva Funcionalidad
+## Desarrollo
+* **Estructura del proyecto:**
+  * [Descripción de los paquetes y su contenido]
+* **Convenciones de código:**
+  * [Mencionar las convenciones utilizadas]
+* **Pruebas:**
+  * [Cobertura de código]
+  * [Herramientas de testing]
 
-Creación de una clase Service:
+## Documentación
+* **Swagger UI:**
+  * [Enlace a la documentación interactiva]
+* **OpenAPI:**
+  * [Enlace al archivo OpenAPI]
 
-Evaluar cuándo es necesario crear una clase Service en la aplicación.
+## Implementación
+* **Profiles:**
+  * [Descripción de los perfiles]
+* **Variables de entorno:**
+  * [Lista de variables de entorno importantes]
+* **Build y despliegue:**
+  * [Comandos para build y despliegue]
 
-Utilizar la anotación @Service para aislar el código de reglas de negocio.
+## Contribuciones
+[Instrucciones para contribuir al proyecto]
 
-Funcionalidad de Reserva de Consultas:
+## Licencia
+[Mencionar la licencia utilizada]
 
-Implementar un algoritmo para gestionar reservas de consultas.
+## Funcionalidades
 
-Validar la integridad de los datos recibidos por la API.
-
-Consultas JPQL Complejas:
-
-Crear consultas complejas en una interfaz Repository utilizando @Query.
-
-2. Aislamiento de Validaciones de Negocio
-
-Creación de Clases de Validación:
-
-Aislar códigos de validaciones en clases separadas.
-
-Utilizar la anotación @Component para gestionar estas clases con Spring.
-
-Principios SOLID:
-
-Aplicar los principios SOLID para hacer el código más mantenible y fácil de entender.
-
-3. Pruebas Automatizadas
-
-Pruebas para Repositories:
-
-Escribir tests automatizados para una interfaz Repository.
-
-Utilizar la misma base de datos que la aplicación.
-
-Profiles de Pruebas:
-
-Crear application-test.properties para configurar propiedades específicas para tests.
-
-Utilizar @ActiveProfiles para ejecutar tests con el perfil de pruebas.
-
-Pruebas para Controllers:
-
-Utilizar MockMvc para simular requests a la API.
-
-Testar escenarios de error (código 400) y éxito (código 200).
-
-4. Documentación con SpringDoc y Swagger
-
-Generación Automática de Documentación:
-
-Integrar SpringDoc para generar la documentación de la API.
-
-Configuración de Swagger UI:
-
-Utilizar Swagger UI para visualizar y probar la API REST.
-
-Acceder a la documentación en formatos YAML y HTML.
-
-Seguridad con JWT:
-
-Configurar JWT en la documentación generada por SpringDoc.
-
-5. Preparación para la Implementación
-
-Profiles Específicos:
-
-Crear archivos de propiedades para cada profile (por ejemplo, application-prod.properties).
-
-Variables de Entorno:
-
-Configurar información sensible a través de variables de entorno.
-
-Build y Ejecución con Maven:
-
-Realizar el build del proyecto con Maven.
-
-
-
-java -jar target/mi-aplicacion.jar --spring.config.name=application-prodjava -jar target/mi-aplicacion.jar --spring.config.name=application-prodEjecutar la aplicación desde la terminal con el comando:
+* **Reserva de Consultas:**
+  * Permite a los usuarios reservar consultas con diferentes profesionales.
+  * Valida la disponibilidad de los profesionales y las franjas horarias.
+  * Ejemplo de consulta JPQL para obtener las consultas disponibles en una fecha determinada:
+    ```sql
+    SELECT c FROM Consulta c WHERE c.fecha >= :fechaInicial AND c.fecha <= :fechaFinal AND c.estado = 'DISPONIBLE'
+    ```
